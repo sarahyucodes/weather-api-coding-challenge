@@ -34,7 +34,7 @@ export default function Station({ station }) {
             md:mb-0'>
             <div className='mb-auto font-semibold text-base xl:text-lg'>{name}</div>
             {renderDetail('Identifier', id)}
-            {renderDetail('Altitude', elevation.value)}
+            {renderDetail('Altitude', `${elevation.value}m`)}
             {renderDetail('Coords', <a className='underline text-blue-700' href={getGoogleMapsLink()} target='_blank' rel='noreferrer'>{getLatLong()}</a>)}
         </div>
     )

@@ -41,12 +41,12 @@ export default function App() {
     <div className='App text-slate-800'>
       <main className='container mx-auto py-10 px-5'>
         <h1 className='text-2xl font-medium'>Radar Stations</h1>
-        <section className='py-4 md:grid md:grid-cols-4 md:gap-4'>
+        <div className='py-4 md:grid md:grid-cols-4 md:gap-4'>
           <aside className='col-span-1 rounded bg-slate-100'></aside>
-          <div className='col-span-3 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3'>
+          <section className='col-span-3 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3'>
             {stations.map((station, index) => <Station key={index} station={station} />)}
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
     </div>
   )
