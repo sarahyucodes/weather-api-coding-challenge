@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 //
-import Station from './components/Station'
+import StationsGrid from './components/StationsGrid'
 
 export default function App() {
   const [stations, setStations] = useState([])
@@ -27,25 +27,15 @@ export default function App() {
     return () => setError(null)
   }, [])
 
-  function getLatLong(coordinates) {
-    return `${coordinates[1]},${coordinates[0]}`
-  }
-
-  function getGoogleMapsLink(coordinates) {
-    const latLong = getLatLong(coordinates)
-
-    return `https://maps.google.com/?q=${latLong}`
-  }
-
   return (
     <div className='App text-slate-800'>
       <main className='container mx-auto py-10 px-5'>
-        <h1 className='text-2xl font-medium'>Radar Stations</h1>
-        <div className='py-4 md:grid md:grid-cols-4 md:gap-4'>
-          <aside className='col-span-1 rounded bg-slate-100'></aside>
-          <section className='col-span-3 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3'>
-            {stations.map((station, index) => <Station key={index} station={station} />)}
-          </section>
+        <h1 className='text-2xl font-medium'>Weather API | Front-End Coding Challenge</h1>
+        <div className='py-8 md:py-12 md:grid md:grid-cols-4 md:gap-4'>
+          <aside className='col-span-1'>
+            <h2 className='text-lg font-medium pb-4 md:text-xl'>Filter by Time Zone</h2>
+          </aside>
+          <StationsGrid stations={stations} error={error} />
         </div>
       </main>
     </div>
