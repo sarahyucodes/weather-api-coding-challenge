@@ -32,7 +32,9 @@ export default function Station({ station }) {
             text-xs
             flex flex-col
             md:mb-0'>
-            <h3 className='mb-10 font-semibold text-base xl:text-lg'>{name}</h3>
+            <h3 className='mb-10 font-semibold text-base xl:text-lg'>
+                {name}
+            </h3>
             {renderDetail('Identifier', id)}
             {renderDetail('Altitude', `${elevation.value}m`)}
             {renderDetail('Coords', <a className='underline text-blue-700' href={getGoogleMapsLink()} target='_blank' rel='noreferrer'>{getLatLong()}</a>)}

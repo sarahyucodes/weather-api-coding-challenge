@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 //
+import { fetchRadarStations } from './services'
 import StationsGrid from './components/StationsGrid'
 import Pagination from './components/Pagination'
 
@@ -11,66 +12,62 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState(1)
 
   const itemsPerPage = 9
-  const totalPages = Math.ceil(allStations.length / 9)
+  const totalPages = Math.ceil(allStations.length / itemsPerPage)
 
   useEffect(() => {
-    const fetchRadarStations = async () => {
-      let response = await fetch('https://api.weather.gov/radar/stations')
-      
-      if (!response.ok) {
-        throw new Error('Data could not be retrieved.')
-      }
-
-      return response.json()
-    }
-
     fetchRadarStations()
       .then(response => {
-        const stations = response.features
-        setAllStations(stations)
-        return stations
-      })
-      .then(response => {
-        const sliceStart = (currentPage - 1) * itemsPerPage
-        const sliceEnd = currentPage * itemsPerPage
-
-        setCurrentStations(response.slice(sliceStart, sliceEnd))
-
-        console.log(`
-        ***
-          PAGE: ${currentPage}
-          START: ${sliceStart}
-          END: ${sliceEnd}
-        ***
-        `);
+        setAllStations(response.features)
+        // initialize first page
+        setCurrentStations(response.features.slice(0, itemsPerPage))
       })
       .catch(error => setError(error.message))
 
     return () => setError(null)
-  }, [currentPage])
+  }, [])
+
+  // determine subset of stations based on page and items per page
+  const updateCurrentStations = (page) => {
+    const sliceStart = (page - 1) * itemsPerPage
+    const sliceEnd = page * itemsPerPage
+
+    setCurrentStations(allStations.slice(sliceStart, sliceEnd))
+
+    // console.log(`
+    //   ***
+    //     PAGE: ${page}
+    //     ITEMS START: ${sliceStart}
+    //     ITEMS END: ${sliceEnd}
+    //   ***
+    // `);
+  }
 
   const updateCurrentPage = next => {
-    if (next) {
-      setCurrentPage(currentPage + 1)
-    } else {
-      setCurrentPage(currentPage - 1)
-    }
+    const updatedCurrentPage = next ? currentPage + 1 : currentPage - 1
+
+    setCurrentPage(updatedCurrentPage)
+    updateCurrentStations(updatedCurrentPage)
   }
 
   return (
     <div className='App text-slate-800'>
       <main className='container mx-auto py-10 px-5'>
-        <h1 className='text-2xl font-medium'>Weather API | Front-End Coding Challenge</h1>
+        <h1 className='text-2xl font-medium'>
+          Weather API | Front-End Coding Challenge
+        </h1>
         <div className='pt-8 md:pt-12 md:grid md:grid-cols-4 md:gap-4'>
           <aside className='col-span-1'>
-            <h2 className='text-lg font-medium pb-4 md:text-xl'>Filter by Time Zone</h2>
+            <h2 className='text-lg font-medium pb-4 md:text-xl'>
+              Filter by Time Zone
+            </h2>
           </aside>
           <StationsGrid 
             currentStations={currentStations}
-            error={error} />
+            error={error}
+          />
         </div>
         {
-          allStations.length ? 
+          totalPages ? 
           <Pagination
             currentPage={currentPage}
             updateCurrentPage={updateCurrentPage}

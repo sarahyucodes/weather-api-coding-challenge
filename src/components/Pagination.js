@@ -7,7 +7,7 @@ export default function Pagination({
       return (
          <button
             aria-label={label}
-            className='p-2'
+            className='w-8'
             onClick={() => updateCurrentPage(next)}
          >
             {next ? '>' : '<'}
@@ -15,10 +15,22 @@ export default function Pagination({
       )
    }
 
+   const renderSpaceholder = () => {
+      return <span className='inline-block w-8'></span>
+   }
+
    return (
       <div className='text-right py-4 font-semibold text-sm'>
-         {currentPage !== 1 ? renderPageToggle(false, 'previous page') : null}
+         {
+            currentPage !== 1 ? 
+            renderPageToggle(false, 'previous page')
+            : renderSpaceholder()
+         }
          <span>Page {currentPage} / {totalPages}</span>
-         {currentPage < totalPages ? renderPageToggle(true, 'next page') : ''}
+         {
+            currentPage < totalPages ? 
+            renderPageToggle(true, 'next page')
+            : renderSpaceholder()
+         }
       </div>   )
 }
