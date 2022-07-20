@@ -3,7 +3,9 @@ import { useState, useEffect, useCallback } from 'react'
 import Station from './Station'
 import Pagination from './Pagination'
 
-export default function StationsGrid({ 
+export default function StationsGrid({
+    filtering,
+    setFiltering,
     filteredStations,
     error 
 }) {    
@@ -29,8 +31,15 @@ export default function StationsGrid({
     }
 
     useEffect(() => {
+        // always set page back to 1 when filtering
+        if (filtering) {
+            setCurrentPage(1)
+            setFiltering(false)
+        }
+
         updateCurrentStations(currentPage)
-    }, [currentPage, updateCurrentStations])
+
+    }, [filtering, setFiltering, currentPage, updateCurrentStations])
 
     return (
         <section className='col-span-3 h-full flex flex-col'>
@@ -40,8 +49,8 @@ export default function StationsGrid({
             <div className='mb-auto sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3'>
                 {
                     error || !currentStations.length ? (
-                        <div className='col-span-full text-red-600 text-sm md:text-base xl:text-lg'>
-                            {error || 'No stations found.'}
+                        <div className={`col-span-full text-sm md:text-base xl:text-lg ${error ? 'text-red-600' : ''}`}>
+                            {error || 'Loading...'}
                         </div>
                     ) : (
                         currentStations.map((station, index) => {

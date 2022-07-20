@@ -9,6 +9,7 @@ export default function App() {
   const [error, setError] = useState(null)
   
   const [filteredStations, setFilteredStations] = useState(allStations)
+  const [filtering, setFiltering] = useState(false)
 
   useEffect(() => {
     fetchRadarStations()
@@ -17,11 +18,9 @@ export default function App() {
         setFilteredStations(response)
       })
       .catch(error => setError(error.message))
-
-    return () => setError(null)
   }, [])
 
-  const filterStations = filters => {
+  const filterStations = filters => {    
     if (filters.length) {
       const updatedFilteredStations = allStations.filter(station => filters.includes(station.timeZone))
   
@@ -30,6 +29,8 @@ export default function App() {
       // no filters selected
       setFilteredStations([...allStations])
     }
+
+    setFiltering(true)
   }
 
 
@@ -44,7 +45,9 @@ export default function App() {
             stations={allStations}
             filterStations={filterStations}  
           />
-          <StationsGrid 
+          <StationsGrid
+            filtering={filtering}
+            setFiltering={setFiltering}
             filteredStations={filteredStations}
             error={error}
           />
