@@ -15,7 +15,7 @@ npm install
 
 2. Initialize time zones data
 ```
-npm init-timezones-data
+npm run init-timezones-data
 ```
 
 3. Start the development server
