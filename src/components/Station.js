@@ -1,23 +1,17 @@
 export default function Station({ station }) {
-    const {
-        name,
-        id,
-        elevation
-    } = station.properties
+    function getLatLong() {   
+        const { lat, lng } = station.coords
 
-    const { coordinates } = station.geometry
-
-    function getLatLong() {
-        return `${coordinates[1]},${coordinates[0]}`
+        return `${lat}, ${lng}`
     }
 
     function getGoogleMapsLink() {
-        return `https://maps.google.com/?q=${getLatLong(coordinates)}`
+        return `https://maps.google.com/?q=${getLatLong()}`
     }
 
     function renderDetail(property, value) {
         return (
-            <div className='flex justify-between xl:text-sm'>
+            <div className='flex justify-between text-xs xl:text-sm'>
                 <span className='font-semibold'>{property}</span>
                 <span>{value}</span>
             </div>
@@ -29,15 +23,15 @@ export default function Station({ station }) {
             col-span-1 w-full
             rounded p-4 mb-4 
             bg-slate-100
-            text-xs
             flex flex-col
             md:mb-0'>
             <h3 className='mb-10 font-semibold text-base xl:text-lg'>
-                {name}
+                {station.name}
             </h3>
-            {renderDetail('Identifier', id)}
-            {renderDetail('Altitude', `${elevation.value}m`)}
+            {renderDetail('Identifier', station.id)}
+            {renderDetail('Altitude', `${station.altitude}m`)}
             {renderDetail('Coords', <a className='underline text-blue-700' href={getGoogleMapsLink()} target='_blank' rel='noreferrer'>{getLatLong()}</a>)}
+            {renderDetail('Zone', station.timeZone.split('_').join(' '))}
         </div>
     )
 }

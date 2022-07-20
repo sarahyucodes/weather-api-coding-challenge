@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { fetchRadarStations } from './services'
 import StationsGrid from './components/StationsGrid'
 import Pagination from './components/Pagination'
+import Sidebar from './components/Sidebar'
 
 export default function App() {
   const [allStations, setAllStations] = useState([])
@@ -17,9 +18,9 @@ export default function App() {
   useEffect(() => {
     fetchRadarStations()
       .then(response => {
-        setAllStations(response.features)
+        setAllStations(response)
         // initialize first page
-        setCurrentStations(response.features.slice(0, itemsPerPage))
+        setCurrentStations(response.slice(0, itemsPerPage))
       })
       .catch(error => setError(error.message))
 
@@ -51,16 +52,12 @@ export default function App() {
 
   return (
     <div className='App text-slate-800'>
-      <main className='container mx-auto py-10 px-5'>
+      <main className='container mx-auto py-10 px-5 min-h-screen flex flex-col'>
         <h1 className='text-2xl font-medium'>
           Weather API | Front-End Coding Challenge
         </h1>
         <div className='pt-8 md:pt-12 md:grid md:grid-cols-4 md:gap-4'>
-          <aside className='col-span-1'>
-            <h2 className='text-lg font-medium pb-4 md:text-xl'>
-              Filter by Time Zone
-            </h2>
-          </aside>
+          <Sidebar stations={allStations} />
           <StationsGrid 
             currentStations={currentStations}
             error={error}
