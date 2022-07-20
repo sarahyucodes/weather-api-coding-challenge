@@ -11,7 +11,7 @@ export default function Station({ station }) {
 
     function renderDetail(property, value) {
         return (
-            <div className='flex justify-between text-xs xl:text-sm'>
+            <div className='flex justify-between text-xs'>
                 <span className='font-semibold'>{property}</span>
                 <span>{value}</span>
             </div>

@@ -20,7 +20,7 @@ export default function Pagination({
    }
 
    return (
-      <div className='text-right py-4 font-semibold text-sm mt-auto'>
+      <div className='text-right py-4 font-semibold text-sm'>
          {
             currentPage !== 1 ? 
             renderPageToggle(false, 'previous page')
@@ -32,5 +32,6 @@ export default function Pagination({
             renderPageToggle(true, 'next page')
             : renderSpaceholder()
          }
-      </div>   )
+      </div>
+   )
 }
