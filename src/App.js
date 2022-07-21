@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 //
 import { fetchRadarStations } from './services'
 import StationsGrid from './components/StationsGrid'
-import Sidebar from './components/Sidebar'
+import Filters from './components/Filters'
 
 export default function App() {
   const [allStations, setAllStations] = useState([])
@@ -24,10 +24,10 @@ export default function App() {
     if (filters.length) {
       const updatedFilteredStations = allStations.filter(station => filters.includes(station.timeZone))
   
-      setFilteredStations([...updatedFilteredStations])
+      setFilteredStations(updatedFilteredStations)
     } else {
       // no filters selected
-      setFilteredStations([...allStations])
+      setFilteredStations(allStations)
     }
 
     setFiltering(true)
@@ -41,7 +41,7 @@ export default function App() {
         </h1>
       </header>
       <aside className='col-span-full md:col-span-1'>
-        <Sidebar 
+        <Filters 
           stations={allStations}
           filterStations={filterStations}  
         />
