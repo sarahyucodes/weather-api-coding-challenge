@@ -6,22 +6,22 @@ import Pagination from './Pagination'
 export default function StationsGrid({
     filtering,
     setFiltering,
-    filteredStations,
+    stations,
     error 
 }) {    
     const [currentStations, setCurrentStations] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
 
     const itemsPerPage = 9
-    const totalPages = Math.ceil(filteredStations.length / itemsPerPage)
+    const totalPages = Math.ceil(stations.length / itemsPerPage)
 
     // determine subset of stations based on page and items per page
     const updateCurrentStations = useCallback(page => {
         const sliceStart = (page - 1) * itemsPerPage
         const sliceEnd = page * itemsPerPage
         
-        setCurrentStations(filteredStations.slice(sliceStart, sliceEnd))
-    }, [filteredStations])
+        setCurrentStations(stations.slice(sliceStart, sliceEnd))
+    }, [stations])
     
     const updateCurrentPage = next => {
         const updatedCurrentPage = next ? currentPage + 1 : currentPage - 1

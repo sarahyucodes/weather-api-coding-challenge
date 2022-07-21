@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
+import Fuse from 'fuse.js'
 //
 import { fetchRadarStations } from './services'
 import StationsGrid from './components/StationsGrid'
 import Filters from './components/Filters'
+import Search from './components/Search'
 
 export default function App() {
   const [allStations, setAllStations] = useState([])
@@ -10,6 +12,17 @@ export default function App() {
   
   const [filteredStations, setFilteredStations] = useState(allStations)
   const [filtering, setFiltering] = useState(false)
+
+  const [searching, setSearching] = useState(false)
+  const [searchedStations, setSearchedStations] = useState([])
+
+  const fuse = new Fuse(filteredStations, {
+    // includeScore: true,
+    threshold: 0.3, // % match
+    keys: [
+      'name'
+    ]
+  })
 
   useEffect(() => {
     fetchRadarStations()
@@ -21,6 +34,8 @@ export default function App() {
   }, [])
 
   const filterStations = filters => {    
+    setFiltering(true)
+    
     if (filters.length) {
       const updatedFilteredStations = allStations.filter(station => filters.includes(station.timeZone))
   
@@ -29,8 +44,21 @@ export default function App() {
       // no filters selected
       setFilteredStations(allStations)
     }
+  }
 
-    setFiltering(true)
+  const searchStations = keyword => {    
+    if (keyword) {
+      setSearching(true)
+    
+      const results = fuse.search(keyword)
+      const updatedStations = results.map(result => result.item)
+
+      setFilteredStations(updatedStations)
+      console.log(updatedStations)
+    } else {
+      setSearching(false)
+      setFilteredStations(allStations)
+    }
   }
 
   return (
@@ -41,6 +69,7 @@ export default function App() {
         </h1>
       </header>
       <aside className='col-span-full md:col-span-1'>
+        <Search searchStations={searchStations} />
         <Filters 
           stations={allStations}
           filterStations={filterStations}  
@@ -50,7 +79,7 @@ export default function App() {
         <StationsGrid
           filtering={filtering}
           setFiltering={setFiltering}
-          filteredStations={filteredStations}
+          stations={filteredStations}
           error={error}
         />
       </main>
