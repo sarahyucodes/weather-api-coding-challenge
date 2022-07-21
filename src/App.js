@@ -16,7 +16,7 @@ export default function App() {
   const [searching, setSearching] = useState(false)
   const [searchedStations, setSearchedStations] = useState([])
 
-  const fuse = new Fuse(filteredStations, {
+  const fuse = new Fuse(allStations, {
     // includeScore: true,
     threshold: 0.3, // % match
     keys: [

@@ -15,6 +15,7 @@ export default function Search({
 
     const handleSubmit = event => {
         event.preventDefault()
+        // searchStations(value)
         searchStations(value)
     }
 
@@ -31,7 +32,7 @@ export default function Search({
                     id='search'
                     name='search'
                     type='text'
-                    className='border rounded p-1 mb-2 w-full'
+                    className='border rounded py-2 px-4 mb-2 w-full'
                 />
                 <button type='submit' className='text-white bg-slate-700 rounded py-1 px-3'>Search</button>
             </form>
