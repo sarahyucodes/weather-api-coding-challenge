@@ -2,8 +2,13 @@ const haversine = require('haversine')
 
 const getUserLatLng = () => {
   return new Promise((resolve, reject) => {
-    return navigator.geolocation.getCurrentPosition(resolve, reject)
+    return navigator.geolocation.getCurrentPosition(resolve, error => {
+      console.log(error.message)
+      resolve(null)
+    })
   })
+
+  
 }
 
 const extractData = async(data) => {
@@ -12,10 +17,10 @@ const extractData = async(data) => {
 
   const userPosition = await getUserLatLng()
 
-  const userLatLng = {
+  const userLatLng = userPosition ? {
     latitude: userPosition.coords.latitude,
     longitude: userPosition.coords.longitude
-  }
+  } : null
 
   return stationsData.map(station => {
     const stationLatLng = {
@@ -29,10 +34,9 @@ const extractData = async(data) => {
       coords: stationLatLng,
       altitude: station.properties.elevation.value,
       timeZone: timeZonesData.filter(item => item.id === station.properties.id)[0].timeZone,
-      distance: haversine(userLatLng, stationLatLng, { unit: 'meter' })
+      distance: userPosition ? haversine(userLatLng, stationLatLng) : 0
     }
-  })
-  .sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance))
+  }).sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance))
 }
 
 export const fetchRadarStations = async() => {
