@@ -34,19 +34,19 @@ export default function App() {
   }
 
   return (
-    <div className='App container mx-auto h-screen h-min-screen py-10 px-4 md:grid md:grid-cols-4 md:gap-4 md:auto-rows-min'>
-      <header className='md:col-span-4 py-4'>
+    <div className='App container mx-auto min-h-screen py-10 px-4 grid grid-cols-4 gap-4 auto-rows-min'>
+      <header className='col-span-full py-4'>
         <h1 className='text-2xl font-medium'>
           Weather API | Front-End Coding Challenge
         </h1>
       </header>
-      <aside className='mb-4 md:mb-0 md:col-span-1'>
+      <aside className='col-span-full md:col-span-1'>
         <Sidebar 
           stations={allStations}
           filterStations={filterStations}  
         />
       </aside>
-      <main className='md:col-span-3'>
+      <main className='col-span-full md:col-span-3'>
         <StationsGrid
           filtering={filtering}
           setFiltering={setFiltering}

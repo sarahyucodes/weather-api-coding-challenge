@@ -23,7 +23,7 @@ export default function Sidebar({
     const renderTimeZoneOptions = () => {
         return allTimeZones.map((timeZone, index) => {
             return (
-                <label key={index} className='text-xs mb-1 last:mb-0'>
+                <label key={index} className='col-span-2 xs:col-span-1 md:col-span-2 text-xs mb-1 flex flex-wrap items-center last:mb-0'>
                     <input 
                         type='checkbox'
                         name='timeZone'
@@ -38,7 +38,7 @@ export default function Sidebar({
 
     return (
         <>
-            <h2 className='text-lg font-medium pb-4 flex items-center md:text-xl'>
+            <h2 className='text-base font-medium flex items-center md:text-lg lg:text-xl'>
                 <span>Filter by Time Zone</span>
                 <button
                     className='ml-2 text-xl'
@@ -49,7 +49,7 @@ export default function Sidebar({
                     {showFilters ? '-' : '+'}
                 </button>
             </h2>
-            <div id='time-zone-filters' className={`flex flex-col overflow-y-hidden ${!showFilters ? 'h-0' : ''}`}>
+            <div id='time-zone-filters' className={`grid grid-cols-2 gap-x-4 overflow-y-hidden ${!showFilters ? 'h-0' : 'pt-4'}`}>
                 {renderTimeZoneOptions()}
             </div>
         </>

@@ -4,11 +4,9 @@ const getUserLatLng = () => {
   return new Promise((resolve, reject) => {
     return navigator.geolocation.getCurrentPosition(resolve, error => {
       console.log(error.message)
-      resolve(null)
+      resolve()
     })
   })
-
-  
 }
 
 const extractData = async(data) => {

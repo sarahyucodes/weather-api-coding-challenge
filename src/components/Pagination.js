@@ -20,7 +20,7 @@ export default function Pagination({
    }
 
    return (
-      <div className='text-right font-semibold text-sm'>
+      <div className='text-right font-semibold text-xs md:text-sm'>
          {
             currentPage !== 1 ? 
             renderPageToggle(false, 'previous page')

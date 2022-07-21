@@ -11,7 +11,7 @@ export default function Station({ station }) {
 
     function renderDetail(property, value) {
         return (
-            <div className='flex justify-between text-xs'>
+            <div className='text-xs flex flex-row justify-between'>
                 <span className='font-semibold'>{property}</span>
                 <span>{value}</span>
             </div>
@@ -19,13 +19,8 @@ export default function Station({ station }) {
     }
 
     return (
-        <div className='
-            col-span-1
-            rounded p-4 mb-4 
-            bg-slate-100
-            flex flex-col
-            md:mb-0'>
-            <h3 className='mb-10 font-semibold text-base xl:text-lg'>
+        <div className='col-span-2 md:col-span-1 flex flex-col rounded p-4 bg-slate-100'>
+            <h3 className='mb-5 md:mb-10 font-semibold text-base xl:text-lg'>
                 {station.name}
             </h3>
             {renderDetail('Identifier', station.id)}

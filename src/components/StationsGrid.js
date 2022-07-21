@@ -44,7 +44,7 @@ export default function StationsGrid({
     return (
         <section className='flex flex-col' >
             <div className='flex items-center justify-between pb-4'>
-                <h2 className='text-lg font-medium md:text-xl'>
+                <h2 className='text-base font-medium md:text-lg lg:text-xl'>
                     Radar Stations
                 </h2>
                 {
@@ -57,7 +57,7 @@ export default function StationsGrid({
                     ) : null
                 }
             </div>
-            <div className='sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3'>
+            <div className='grid grid-cols-2 gap-4 lg:grid-cols-3'>
                 {
                     error || !currentStations.length ? (
                         <div className={`col-span-full text-sm md:text-base xl:text-lg ${error ? 'text-red-600' : ''}`}>
