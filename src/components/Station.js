@@ -1,8 +1,8 @@
 export default function Station({ station }) {
     function getLatLong() {   
-        const { lat, lng } = station.coords
+        const { latitude, longitude } = station.coords
 
-        return `${lat}, ${lng}`
+        return `${latitude}, ${longitude}`
     }
 
     function getGoogleMapsLink() {

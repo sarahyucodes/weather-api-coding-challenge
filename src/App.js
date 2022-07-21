@@ -33,7 +33,6 @@ export default function App() {
     setFiltering(true)
   }
 
-
   return (
     <div className='App container mx-auto h-screen h-min-screen py-10 px-4 md:grid md:grid-cols-4 md:gap-4 md:auto-rows-min'>
       <header className='md:col-span-4 py-4'>

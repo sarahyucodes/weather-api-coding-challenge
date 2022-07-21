@@ -47,11 +47,15 @@ export default function StationsGrid({
                 <h2 className='text-lg font-medium md:text-xl'>
                     Radar Stations
                 </h2>
-                <Pagination
-                    currentPage={currentPage}
-                    updateCurrentPage={updateCurrentPage}
-                    totalPages={totalPages}
-                />
+                {
+                    totalPages ? (
+                        <Pagination
+                            currentPage={currentPage}
+                            updateCurrentPage={updateCurrentPage}
+                            totalPages={totalPages}
+                        />
+                    ) : null
+                }
             </div>
             <div className='sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3'>
                 {
