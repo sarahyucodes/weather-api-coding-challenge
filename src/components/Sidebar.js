@@ -37,8 +37,8 @@ export default function Sidebar({
     }
 
     return (
-        <aside className='col-span-1 mb-4 md:mb-0'>
-            <h2 className='text-base font-medium pb-4 flex items-center'>
+        <>
+            <h2 className='text-lg font-medium pb-4 flex items-center md:text-xl'>
                 <span>Filter by Time Zone</span>
                 <button
                     className='ml-2 text-xl'
@@ -52,6 +52,6 @@ export default function Sidebar({
             <div id='time-zone-filters' className={`flex flex-col overflow-y-hidden ${!showFilters ? 'h-0' : ''}`}>
                 {renderTimeZoneOptions()}
             </div>
-        </aside>
+        </>
     )
 }

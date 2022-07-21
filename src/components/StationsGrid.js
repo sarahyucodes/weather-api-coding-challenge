@@ -42,11 +42,18 @@ export default function StationsGrid({
     }, [filtering, setFiltering, currentPage, updateCurrentStations])
 
     return (
-        <section className='col-span-3 h-full flex flex-col'>
-            <h2 className='text-lg font-medium pb-4 md:text-xl'>
-                Radar Stations
-            </h2>
-            <div className='mb-auto sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3'>
+        <section className='flex flex-col' >
+            <div className='flex items-center justify-between pb-4'>
+                <h2 className='text-lg font-medium md:text-xl'>
+                    Radar Stations
+                </h2>
+                <Pagination
+                    currentPage={currentPage}
+                    updateCurrentPage={updateCurrentPage}
+                    totalPages={totalPages}
+                />
+            </div>
+            <div className='sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3'>
                 {
                     error || !currentStations.length ? (
                         <div className={`col-span-full text-sm md:text-base xl:text-lg ${error ? 'text-red-600' : ''}`}>
@@ -61,11 +68,7 @@ export default function StationsGrid({
                      )
                 }
             </div>
-            <Pagination
-                currentPage={currentPage}
-                updateCurrentPage={updateCurrentPage}
-                totalPages={totalPages}
-            />
+
         </section>
     )
 }

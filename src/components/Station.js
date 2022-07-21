@@ -20,7 +20,7 @@ export default function Station({ station }) {
 
     return (
         <div className='
-            col-span-1 w-full
+            col-span-1
             rounded p-4 mb-4 
             bg-slate-100
             flex flex-col
