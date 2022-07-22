@@ -15,7 +15,6 @@ export default function Search({
 
     const handleSubmit = event => {
         event.preventDefault()
-        // searchStations(value)
         searchStations(value)
     }
 
