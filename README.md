@@ -1,24 +1,30 @@
+
 # Weather API | Front-End Coding Challenge
 
-This project was created using:
-1. [React](https://reactjs.org/)
-2. [Tailwind CSS](https://tailwindcss.com/)
-3. [National Weather Service API](https://www.weather.gov/documentation/services-web-api)
-4. [neo-geo-tz](https://github.com/evansiroky/node-geo-tz)
+I created this project with [React](https://reactjs.org/) and [Tailwind CSS](https://tailwindcss.com/).
+
+It uses data from the [National Weather Service API](https://www.weather.gov/documentation/services-web-api) from the following endpoint:
+```
+https://api.weather.gov/radar/stations
+```
+I also used [neo-geo-tz](https://github.com/evansiroky/node-geo-tz) to get time zone using coordinates and [haversine](https://github.com/njj/haversine) to calculate distance between two sets of coordinates.
 
 ## Installation
 
 1. Install dependencies
-```
-npm install
-```
 
+	```
+	npm install
+	```
+	
 2. Initialize time zones data
-```
-npm run init-timezones-data
-```
 
+	```
+	npm run init-timezones-data
+	```
+	
 3. Start the development server
-```
-npm run start
-```
+
+	```
+	npm run start
+	```
